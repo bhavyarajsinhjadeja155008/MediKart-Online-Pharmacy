@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="380" viewBox="0 0 300 380">
+  <!-- Sample doctor's prescription (used in admin prescription review) -->
+  <rect x="5" y="5" width="290" height="370" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+  <rect x="5" y="5" width="290" height="60" rx="10" fill="#0f766e"/>
+  <text x="20" y="32" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff">Dr. M. Pandya, MBBS</text>
+  <text x="20" y="52" font-family="Arial" font-size="11" fill="#ccfbf1">City Clinic, Ahmedabad | Reg. No. G-24518</text>
+  <text x="20" y="95" font-family="Arial" font-size="12" fill="#334155">Patient: Riya Shah   Age: 34   Date: 06/10/2026</text>
+  <text x="20" y="140" font-family="Georgia" font-size="34" font-weight="bold" fill="#0f766e">Rx</text>
+  <text x="40" y="180" font-family="Arial" font-size="13" fill="#0f172a">1. Amoxicillin 500 mg Cap</text>
+  <text x="60" y="198" font-family="Arial" font-size="11" fill="#64748b">1 cap x 3 times a day x 5 days</text>
+  <text x="40" y="228" font-family="Arial" font-size="13" fill="#0f172a">2. Paracetamol 500 mg Tab</text>
+  <text x="60" y="246" font-family="Arial" font-size="11" fill="#64748b">1 tab when fever (SOS)</text>
+  <line x1="170" y1="320" x2="275" y2="320" stroke="#334155" stroke-width="1.5"/>
+  <polygon points="180,312 195,298 205,314 220,296 235,312 250,300" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="185" y="338" font-family="Arial" font-size="11" fill="#334155">Doctor's Signature</text>
+  <circle cx="70" cy="320" r="28" fill="none" stroke="#dc2626" stroke-width="2" opacity="0.6"/>
+  <text x="70" y="324" font-family="Arial" font-size="9" text-anchor="middle" fill="#dc2626" opacity="0.8">CLINIC SEAL</text>
+</svg>

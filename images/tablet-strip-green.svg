@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Tablet strip (green, prescription) -->
+  <rect width="200" height="200" fill="#ecfdf5"/>
+  <rect x="30" y="45" width="140" height="110" rx="10" fill="#a7f3d0" stroke="#10b981" stroke-width="3"/>
+  <ellipse cx="65" cy="80" rx="20" ry="12" fill="#ffffff"/>
+  <ellipse cx="135" cy="80" rx="20" ry="12" fill="#ffffff"/>
+  <ellipse cx="65" cy="120" rx="20" ry="12" fill="#ffffff"/>
+  <ellipse cx="135" cy="120" rx="20" ry="12" fill="#ffffff"/>
+  <text x="100" y="105" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#047857">Rx</text>
+  <text x="100" y="182" text-anchor="middle" font-family="Arial" font-size="14" fill="#065f46">TABLETS</text>
+</svg>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Client/account.html  (CLIENT 4 - Login / Registration page)
+    Uses    : Bootstrap grid, cards, form controls, modal; HTML5 form validation (required, type=email, pattern, minlength, min/max)
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Login or create a MediKart account.">
+    <title>MediKart | Login / Register</title>
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Our own stylesheet (loaded after Bootstrap so it can override it) -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body id="top">
+
+    <!-- ================= TOP INFO BAR ================= -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span>&#9742; +91 98765 43210</span>
+            <span>&#9993; support@medikart.in</span>
+            <span class="top-bar-note">Free delivery on orders above &#8377;499</span>
+        </div>
+    </div>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand brand" href="index.html">
+                    <img src="../images/logo.svg" alt="MediKart logo" width="40" height="40">
+                    <span>Medi<b>Kart</b></span>
+                </a>
+                <!-- Hamburger button (shown below 992px) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu"
+                        aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="medicines.html">Medicines</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">About &amp; Contact</a></li>
+                        <li class="nav-item"><a class="nav-link nav-btn active" href="account.html">Login / Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ================= PAGE BANNER + BREADCRUMB ================= -->
+        <section class="page-banner">
+            <div class="container">
+                <h1>My Account</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Login / Register</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+
+                    <!-- ================= LOGIN FORM ================= -->
+                    <div class="col-lg-5 mb-4">
+                        <div class="card auth-card">
+                            <div class="card-header">
+                                <h2>Login</h2>
+                                <small>Welcome back! Please login to your account.</small>
+                            </div>
+                            <div class="card-body p-4">
+                                <!-- novalidate: JavaScript (js/validation.js) checks this form instead of the browser -->
+                                <form action="account.html" method="post" novalidate onsubmit="return validateLogin()">
+                                    <!-- error / success message from JavaScript appears here -->
+                                    <div id="loginMessage"></div>
+                                    <div class="mb-3">
+                                        <label for="loginEmail" class="form-label required">Email</label>
+                                        <input type="email" class="form-control" id="loginEmail" name="email"
+                                               placeholder="you@example.com" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="loginPassword" class="form-label required">Password</label>
+                                        <input type="password" class="form-control" id="loginPassword" name="password"
+                                               placeholder="Enter password" minlength="8" required>
+                                    </div>
+                                    <!-- One common login for customers and admin. The role is saved with each
+                                         account, so in the backend phase the server will open the website
+                                         for customers and the admin panel for admin users automatically. -->
+                                    <div class="mb-3 form-check">
+                                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                        <label class="form-check-label" for="remember">Remember me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-brand w-100">Login</button>
+                                </form>
+
+                                <!-- Forgot password opens a modal -->
+                                <p class="divider-text">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#forgotModal">Forgot password?</a>
+                                </p>
+
+                                <div class="info-note">
+                                    <strong>Why create an account?</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li>Track your orders</li>
+                                        <li>Save prescriptions &amp; addresses</li>
+                                        <li>Get refill reminders</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================= REGISTRATION FORM ================= -->
+                    <div class="col-lg-7 mb-4">
+                        <div class="card auth-card register">
+                            <div class="card-header">
+                                <h2>Create New Account</h2>
+                                <small>Fields marked <span class="text-warning">*</span> are required.</small>
+                            </div>
+                            <div class="card-body p-4">
+                                <!-- novalidate: JavaScript (js/validation.js) checks this form instead of the browser -->
+                                <form action="account.html" method="post" enctype="multipart/form-data" novalidate onsubmit="return validateRegister()">
+                                    <!-- error / success message from JavaScript appears here -->
+                                    <div id="registerMessage"></div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="firstName" class="form-label required">First Name</label>
+                                            <input type="text" class="form-control" id="firstName" name="first_name"
+                                                   pattern="[A-Za-z ]{2,30}" title="Only letters, 2 to 30 characters" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="lastName" class="form-label required">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName" name="last_name"
+                                                   pattern="[A-Za-z ]{2,30}" title="Only letters, 2 to 30 characters" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="regEmail" class="form-label required">Email</label>
+                                            <input type="email" class="form-control" id="regEmail" name="email" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="phone" class="form-label required">Mobile Number</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="10-digit number"
+                                                   pattern="[6-9][0-9]{9}" title="Enter a valid 10-digit Indian mobile number" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="regPassword" class="form-label required">Password</label>
+                                            <input type="password" class="form-control" id="regPassword" name="password"
+                                                   minlength="8" title="Minimum 8 characters" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="confirmPassword" class="form-label required">Confirm Password</label>
+                                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password"
+                                                   minlength="8" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="dob" class="form-label">Date of Birth</label>
+                                            <input type="date" class="form-control" id="dob" name="dob" min="1920-01-01" max="2010-12-31">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <span class="form-label d-block">Gender</span>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="male" name="gender" value="male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="female" name="gender" value="female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" id="other" name="gender" value="other">
+                                                <label class="form-check-label" for="other">Other</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <label for="address" class="form-label required">Delivery Address</label>
+                                            <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="city" class="form-label required">City</label>
+                                            <select class="form-select" id="city" name="city" required>
+                                                <option value="">-- Select city --</option>
+                                                <option>Rajkot</option>
+                                                <option>Ahmedabad</option>
+                                                <option>Surat</option>
+                                                <option>Vadodara</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="regPincode" class="form-label required">Pincode</label>
+                                            <input type="text" class="form-control" id="regPincode" name="pincode"
+                                                   pattern="[0-9]{6}" title="6-digit pincode" required>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <label for="prescription" class="form-label">Upload Prescription (optional)</label>
+                                            <input class="form-control" type="file" id="prescription" name="prescription" accept=".jpg,.png,.pdf">
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                                <label class="form-check-label required" for="terms">I agree to the Terms &amp; Privacy Policy</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-brand">Create Account</button>
+                                    <button type="reset" class="btn btn-outline-brand">Clear</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FORGOT PASSWORD MODAL ================= -->
+        <div class="modal fade" id="forgotModal" tabindex="-1" aria-labelledby="forgotTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form action="account.html" method="post">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="forgotTitle">Reset Password</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your registered email. We will send you a password reset link.</p>
+                            <label for="resetEmail" class="form-label required">Email</label>
+                            <input type="email" class="form-control" id="resetEmail" name="reset_email" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-brand" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-brand">Send Link</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Medi<span class="text-warning">Kart</span></h5>
+                    <p>MediKart is an online pharmacy that delivers genuine medicines and health products, checked by licensed pharmacists.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="medicines.html">Medicines</a></li>
+                        <li><a href="contact.html">About Us</a></li>
+                        <li><a href="account.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="medicines.html">Fever &amp; Pain</a></li>
+                        <li><a href="medicines.html">Vitamins</a></li>
+                        <li><a href="medicines.html">Devices</a></li>
+                        <li><a href="medicines.html">Skin Care</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Contact Us</h5>
+                    <address>
+                        12, Health Plaza, Kalawad Road,<br>Rajkot, Gujarat - 360005<br>
+                        &#9742; +91 98765 43210<br>
+                        &#9993; support@medikart.in
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 MediKart. Web Technology Term Work.</span>
+                <a href="../Admin/dashboard.html">Admin Panel</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#top" class="back-to-top" title="Back to top">&#8679;</a>
+
+    <!-- Our JavaScript form validation -->
+    <script src="../js/validation.js"></script>
+    <!-- Bootstrap JS bundle (needed for navbar toggle, carousel, modal, collapse) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

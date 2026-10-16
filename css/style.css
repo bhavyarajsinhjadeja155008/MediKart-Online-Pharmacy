@@ -1,0 +1,1061 @@
+/* ==========================================================================
+   MediKart - Online Pharmacy
+   File    : css/style.css
+   Purpose : Common styles + CLIENT side styles (used by the 5 client pages)
+   Topics  : CSS variables, selectors, pseudo-classes / pseudo-elements,
+             box model, backgrounds, borders, text effects, 2D transforms,
+             transitions, animations, positioning, flexbox, CSS grid,
+             multi-column layout and media queries.
+   Note    : Bootstrap 5.3.3 (CDN) is loaded before this file, so the rules
+             written here customise / extend Bootstrap.
+   ========================================================================== */
+
+
+/* ---------- 1. CSS VARIABLES (global theme colours) ---------- */
+:root {
+    --primary: #0f766e;        /* main teal colour            */
+    --primary-dark: #115e59;   /* hover / dark teal            */
+    --primary-light: #ccfbf1;  /* light teal backgrounds       */
+    --accent: #f59e0b;         /* orange highlight colour      */
+    --danger: #dc2626;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --dark: #0f172a;
+    --radius: 12px;
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    --transition: all 0.3s ease;
+
+    /* Bootstrap accordion colours changed through its own variables */
+    --bs-accordion-active-bg: var(--primary-light);
+    --bs-accordion-active-color: var(--primary-dark);
+}
+
+
+/* ---------- 2. BASE / ELEMENT SELECTORS ---------- */
+body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 700;
+}
+
+/* Plain element selector (low specificity, so Bootstrap .btn colours still win) */
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* Pseudo-element: colour of text selected by the user */
+::selection {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+img {
+    max-width: 100%;
+    height: auto;     /* keeps image ratio when it shrinks */
+}
+
+
+/* ---------- 3. TOP INFO BAR ---------- */
+.top-bar {
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    font-size: 0.85rem;
+    padding: 6px 0;
+}
+
+.top-bar-inner {
+    display: flex;                 /* flexbox */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px 20px;
+}
+
+
+/* ---------- 4. HEADER / NAVBAR (Bootstrap .navbar customised) ---------- */
+.site-header {
+    position: sticky;              /* positioning: stays on top while scrolling */
+    top: 0;
+    z-index: 1000;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text) !important;
+}
+
+.brand b {
+    color: var(--primary);
+}
+
+.site-header .nav-link {
+    font-weight: 600;
+    color: var(--text);
+    padding: 8px 14px !important;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+/* Login button in the menu */
+.site-header .nav-link.nav-btn {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.site-header .nav-link.nav-btn:hover {
+    background-color: var(--primary-dark);
+    color: var(--white);
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+
+/* ---------- 5. BUTTONS (custom brand buttons) ---------- */
+.btn-brand {
+    background-color: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--primary);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-brand:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--white);
+    transform: translateY(-2px);   /* 2D transform */
+}
+
+.btn-outline-brand {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-outline-brand:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: var(--dark);
+    border-radius: 30px;
+    padding: 8px 22px;
+    font-weight: 700;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-accent:hover {
+    background-color: #d97706;
+    color: var(--white);
+}
+
+
+/* ---------- 6. SECTIONS & TITLES ---------- */
+.section {
+    padding: 60px 0;
+}
+
+.section-white {
+    background-color: var(--white);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 12px;
+}
+
+/* Pseudo-element ::after draws the small underline below the title */
+.section-title h2::after {
+    content: "";
+    position: absolute;           /* positioned relative to the h2 */
+    left: 25%;
+    bottom: 0;
+    width: 50%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--accent);
+}
+
+.section-title p {
+    color: var(--muted);
+    margin: 0;
+}
+
+
+/* ---------- 7. HOME: HERO CAROUSEL ---------- */
+.hero-slide {
+    padding: 60px 0;
+    min-height: 420px;
+}
+
+.hero-slide.slide-1 { background-color: var(--primary-light); }
+.hero-slide.slide-2 { background-color: #fef3c7; }
+.hero-slide.slide-3 { background-color: #e0f2fe; }
+
+.hero-text h1 {
+    color: var(--dark);
+    animation: fadeUp 1s ease;     /* animation (see @keyframes below) */
+}
+
+.hero-text h1 span {
+    color: var(--primary);
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    animation: fadeUp 1.4s ease;
+}
+
+.hero-img {
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+
+/* Small pill above the heading */
+.hero-tag {
+    display: inline-block;
+    background-color: var(--white);
+    color: var(--primary);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    border: 1px solid var(--primary);
+}
+
+/* Carousel arrows: narrow, and hidden below 1200px so they never cover text */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+}
+
+@media (max-width: 1199.98px) {
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+}
+
+/* Carousel arrows dark so they are visible on light slides */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--primary);
+    border-radius: 50%;
+    padding: 18px;
+    background-size: 50%;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--primary);
+}
+
+
+/* ---------- 8. HOME: FEATURES STRIP (CSS GRID) ---------- */
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;            /* phones: 1 column */
+    gap: 20px;
+    margin-top: -40px;             /* overlaps the hero a little */
+    position: relative;
+    z-index: 5;
+}
+
+.feature-box {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.feature-box:hover {
+    transform: translateY(-6px);
+}
+
+.feature-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-box h5 {
+    margin: 0 0 2px;
+    font-size: 1rem;
+}
+
+.feature-box p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+
+/* ---------- 9. CATEGORY CARDS ---------- */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 18px;
+}
+
+.category-card {
+    display: block;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 12px;
+    text-align: center;
+    color: var(--text) !important;
+    transition: var(--transition);
+}
+
+.category-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: var(--transition);
+}
+
+.category-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.category-card:hover img {
+    transform: scale(1.1) rotate(-5deg);   /* multiple 2D transforms */
+}
+
+.category-card h6 {
+    margin: 0;
+    font-weight: 600;
+}
+
+
+/* ---------- 10. PRODUCT CARDS (used on home, listing, details) ---------- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 22px;
+}
+
+.product-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    transition: var(--transition);
+}
+
+.product-card:hover {
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    transform: translateY(-4px);
+}
+
+.product-card .card-img-top {
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.06);
+}
+
+.product-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card .card-title {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    /* text effect: long names end with "..." */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-card .card-title a {
+    color: var(--text);
+}
+
+.product-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.product-card .btn-brand {
+    margin-top: auto;               /* pushes button to card bottom */
+    width: 100%;
+    padding: 6px 12px;
+}
+
+/* Discount label positioned on the top-left corner of the card */
+.discount-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    background-color: var(--danger);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+/* Small coloured tags (Rx / OTC / In stock) */
+.tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tag-rx    { background-color: #fee2e2; color: #b91c1c; }
+.tag-otc   { background-color: #dcfce7; color: #15803d; }
+.tag-stock { background-color: var(--primary-light); color: var(--primary-dark); }
+
+.price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.price del {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 6px;
+}
+
+
+/* ---------- 11. HOME: HOW TO ORDER STEPS ---------- */
+.steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.steps li {
+    text-align: center;
+    padding: 20px;
+}
+
+.step-num {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    border: 3px dashed var(--primary);
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.steps p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+
+/* ---------- 12. TESTIMONIALS ---------- */
+.testimonial {
+    background-color: var(--white);
+    border-left: 5px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    height: 100%;
+    margin: 0;
+}
+
+.testimonial .blockquote {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.stars {
+    color: var(--accent);
+    letter-spacing: 2px;
+}
+
+
+/* ---------- 13. CALL-TO-ACTION BOX (jumbotron style) ---------- */
+.cta-box {
+    background-color: var(--primary);
+    /* background image: the logo SVG placed on the right side */
+    background-image: url("../images/logo.svg");
+    background-repeat: no-repeat;
+    background-position: right 30px center;
+    background-size: 140px;
+    color: var(--white);
+}
+
+.cta-box h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);   /* text effect */
+}
+
+
+/* ---------- 14. PAGE BANNER + BREADCRUMB (inner pages) ---------- */
+.page-banner {
+    background-color: var(--primary-light);
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-banner h1 {
+    margin-bottom: 6px;
+}
+
+.page-banner .breadcrumb {
+    margin: 0;
+}
+
+
+/* ---------- 15. MEDICINES LISTING: FILTERS + TOOLBAR ---------- */
+.filter-box {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: sticky;
+    top: 90px;
+}
+
+.filter-box h6 {
+    font-weight: 700;
+    margin: 18px 0 10px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.filter-toggle {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* On large screens the filter panel is always visible and the
+   "Show filters" button is hidden (media query) */
+@media (min-width: 992px) {
+    #filterPanel {
+        display: block;
+    }
+    .filter-toggle {
+        display: none;
+    }
+}
+
+.list-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 22px;
+}
+
+.list-toolbar p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.list-toolbar .form-select {
+    width: auto;
+}
+
+.pagination .page-link {
+    color: var(--primary);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+
+/* ---------- 16. MEDICINE DETAILS ---------- */
+.detail-image {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+}
+
+.thumb-list {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.thumb-list img {
+    width: 70px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.thumb-list img:hover {
+    opacity: 1;
+    border-color: var(--primary);
+}
+
+.price-big {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.price-big del {
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.price-big mark {
+    font-size: 0.95rem;
+    background-color: #dcfce7;
+    color: #15803d;
+    border-radius: 6px;
+}
+
+.qty-input {
+    max-width: 100px;
+}
+
+.info-note {
+    background-color: #fffbeb;
+    border: 1px dashed var(--accent);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+}
+
+
+/* ---------- 17. DATA TABLE (plain HTML table styled with CSS) ---------- */
+.table-wrap {
+    overflow-x: auto;               /* horizontal scroll on small screens */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+}
+
+.data-table caption {
+    caption-side: top;
+    font-weight: 700;
+    color: var(--text);
+    padding-bottom: 10px;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.data-table th {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.data-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+
+/* ---------- 18. FORMS (login / register / contact) ---------- */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(15, 118, 110, 0.2);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: var(--primary);
+}
+
+/* Required fields get a red star using ::after */
+.required::after {
+    content: " *";
+    color: var(--danger);
+}
+
+.auth-card {
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    height: 100%;
+}
+
+.auth-card .card-header {
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 16px 20px;
+}
+
+.auth-card .card-header h2 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.auth-card.register .card-header {
+    background-color: var(--dark);
+}
+
+.divider-text {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 16px 0;
+}
+
+
+/* JavaScript validation messages (js/validation.js) */
+.form-message {
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    animation: fadeUp 0.4s ease;
+}
+
+.form-message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.form-message.success {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+
+/* ---------- 19. ABOUT & CONTACT ---------- */
+/* Multi-column layout for the about text */
+.about-columns {
+    column-count: 1;
+    column-gap: 40px;
+    column-rule: 1px solid var(--border);
+}
+
+.about-columns p::first-letter {
+    /* pseudo-element: bigger first letter */
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px;
+}
+
+.stat-box {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 22px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-box h3 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin: 0;
+}
+
+.stat-box p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.team-card {
+    text-align: center;
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px 16px;
+    height: 100%;
+    transition: var(--transition);
+}
+
+.team-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--primary-light);
+    margin: 0 auto 12px;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-info .list-group-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+}
+
+.contact-icon {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.map-frame {
+    width: 100%;
+    height: 320px;
+    border: 0;
+    border-radius: var(--radius);
+}
+
+
+/* ---------- 20. FOOTER ---------- */
+.site-footer {
+    background-color: var(--dark);
+    color: #cbd5e1;
+    padding-top: 50px;
+    margin-top: 60px;
+}
+
+.site-footer h5 {
+    color: var(--white);
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+}
+
+.site-footer a {
+    transition: var(--transition);
+}
+
+/* Pseudo-classes for footer links (LVHA order: link, visited, hover, active) */
+.site-footer a:link,
+.site-footer a:visited {
+    color: #cbd5e1;
+}
+
+.site-footer a:hover {
+    color: var(--accent);
+    padding-left: 4px;
+}
+
+.site-footer a:active {
+    color: var(--white);
+}
+
+.site-footer .list-unstyled li {
+    margin-bottom: 8px;
+}
+
+.footer-col {
+    margin-bottom: 30px;
+}
+
+.footer-bottom {
+    border-top: 1px solid #334155;
+    padding: 18px 0;
+    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* "Back to top" button fixed to the bottom-right corner */
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 999;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--dark) !important;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1);
+}
+
+
+/* ---------- 21. ANIMATIONS (@keyframes) ---------- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatUpDown {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+}
+
+
+/* ---------- 22. MEDIA QUERIES (responsive tweaks) ---------- */
+
+/* Small tablets: 2 feature boxes per row */
+@media (min-width: 576px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktops: 4 feature boxes per row */
+@media (min-width: 992px) {
+    .feature-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Tablets and up */
+@media (min-width: 768px) {
+    .about-columns {
+        column-count: 2;            /* 2 text columns on wider screens */
+    }
+}
+
+/* Below large screens: navbar menu opens as a vertical list */
+@media (max-width: 991.98px) {
+    .site-header .navbar-nav {
+        padding: 10px 0;
+        gap: 4px;
+    }
+    .hero-slide {
+        text-align: center;
+    }
+    .hero-img {
+        max-width: 260px;
+        margin-top: 24px;
+    }
+    .filter-box {
+        position: static;
+    }
+}
+
+/* Phones */
+@media (max-width: 575.98px) {
+    .section {
+        padding: 40px 0;
+    }
+    .hero-slide {
+        padding: 40px 0 60px;
+        min-height: auto;
+    }
+    .display-5 {
+        font-size: 1.8rem;
+    }
+    .top-bar-note {
+        display: none;
+    }
+    .cta-box {
+        background-image: none;
+    }
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);   /* 2 products per row */
+        gap: 12px;
+    }
+    .product-card .card-body {
+        padding: 10px;
+    }
+    .price-big {
+        font-size: 1.6rem;
+    }
+}

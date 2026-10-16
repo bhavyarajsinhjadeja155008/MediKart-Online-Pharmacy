@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <!-- Generic user avatar -->
+  <circle cx="60" cy="60" r="58" fill="#ccfbf1"/>
+  <circle cx="60" cy="46" r="22" fill="#0f766e"/>
+  <ellipse cx="60" cy="100" rx="36" ry="24" fill="#0f766e"/>
+</svg>

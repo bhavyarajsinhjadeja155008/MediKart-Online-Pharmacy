@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Admin/dashboard.html  (ADMIN 1 - Dashboard (overview / stats))
+    Uses    : CSS grid stat cards, inline SVG bar chart (rect, line, text), Bootstrap grid, progress bars, list group; HTML table
+    Layout  : Common admin layout = dark sidebar (left) + top bar + content area
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediKart Admin | Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="admin-body">
+<div class="admin-wrapper">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-top">
+            <a href="dashboard.html" class="brand">
+                <img src="../images/logo.svg" alt="MediKart logo" width="34" height="34">
+                <span>MediKart <small>ADMIN</small></span>
+            </a>
+            <!-- Toggle button: visible below 992px only (see admin.css) -->
+            <button class="sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"
+                    aria-controls="adminMenu" aria-expanded="false" aria-label="Toggle admin menu">&#9776;</button>
+        </div>
+
+        <nav id="adminMenu" class="collapse">
+            <p class="sidebar-label">Main Menu</p>
+            <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link active" href="dashboard.html" aria-current="page"><span>&#9632;</span> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-medicines.html"><span>&#10010;</span> Manage Medicines</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html"><span>&#9776;</span> Orders &amp; Customers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="prescriptions.html"><span>&#9998;</span> Prescriptions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html"><span>&#9881;</span> Reports &amp; Settings</a></li>
+            </ul>
+            <p class="sidebar-label">Other</p>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="../Client/index.html" target="_blank"><span>&#8599;</span> View Website</a></li>
+                <li class="nav-item"><a class="nav-link logout" href="../Client/account.html"><span>&#10162;</span> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ================= MAIN AREA ================= -->
+    <div class="admin-main">
+        <!-- Top bar: page title, breadcrumb and logged-in admin -->
+        <header class="admin-topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.html">Admin</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="admin-user">
+                <img src="../images/avatar.svg" alt="Admin photo">
+                <span><strong>Kavya Desai</strong><br><small class="text-muted">Administrator</small></span>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <!-- ================= STAT CARDS ================= -->
+            <section class="stat-cards">
+                <article class="stat-card">
+                    <p>Today's Sales</p>
+                    <h3>&#8377;18,450</h3>
+                    <small class="up">&#9650; 12% vs yesterday</small>
+                </article>
+                <article class="stat-card orange">
+                    <p>Orders Today</p>
+                    <h3>126</h3>
+                    <small class="up">&#9650; 8% vs yesterday</small>
+                </article>
+                <article class="stat-card blue">
+                    <p>Total Customers</p>
+                    <h3>52,840</h3>
+                    <small class="up">&#9650; 340 new this week</small>
+                </article>
+                <article class="stat-card red">
+                    <p>Low Stock Items</p>
+                    <h3>9</h3>
+                    <small class="down">&#9660; Needs re-order</small>
+                </article>
+            </section>
+
+            <div class="row">
+                <!-- ================= SALES CHART (inline SVG) ================= -->
+                <div class="col-xl-8">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Monthly Sales (&#8377; in lakh)</h2>
+                            <a href="reports.html" class="btn btn-sm btn-outline-brand">Full Report</a>
+                        </div>
+                        <svg class="chart-svg" viewBox="0 0 600 260" role="img" aria-label="Bar chart of monthly sales from April to September 2026">
+                            <!-- grid lines + y-axis labels -->
+                            <line x1="50" y1="220" x2="590" y2="220" stroke="#94a3b8" stroke-width="2"/>
+                            <line x1="50" y1="140" x2="590" y2="140" stroke="#e2e8f0"/>
+                            <line x1="50" y1="60"  x2="590" y2="60"  stroke="#e2e8f0"/>
+                            <text x="40" y="224" font-size="12" fill="#64748b" text-anchor="end">0</text>
+                            <text x="40" y="144" font-size="12" fill="#64748b" text-anchor="end">2</text>
+                            <text x="40" y="64"  font-size="12" fill="#64748b" text-anchor="end">4</text>
+
+                            <!-- bars: height = value x 40 px, baseline y = 220 -->
+                            <rect class="bar" x="75"  y="136" width="50" height="84"  rx="4"/>
+                            <rect class="bar" x="160" y="116" width="50" height="104" rx="4"/>
+                            <rect class="bar" x="245" y="124" width="50" height="96"  rx="4"/>
+                            <rect class="bar" x="330" y="92"  width="50" height="128" rx="4"/>
+                            <rect class="bar" x="415" y="68"  width="50" height="152" rx="4"/>
+                            <rect class="bar" x="500" y="48"  width="50" height="172" rx="4"/>
+
+                            <!-- values above bars -->
+                            <text x="100" y="130" font-size="12" text-anchor="middle" fill="#0f172a">2.1</text>
+                            <text x="185" y="110" font-size="12" text-anchor="middle" fill="#0f172a">2.6</text>
+                            <text x="270" y="118" font-size="12" text-anchor="middle" fill="#0f172a">2.4</text>
+                            <text x="355" y="86"  font-size="12" text-anchor="middle" fill="#0f172a">3.2</text>
+                            <text x="440" y="62"  font-size="12" text-anchor="middle" fill="#0f172a">3.8</text>
+                            <text x="525" y="42"  font-size="12" text-anchor="middle" fill="#0f172a">4.3</text>
+
+                            <!-- month labels -->
+                            <text x="100" y="242" font-size="13" text-anchor="middle" fill="#64748b">Apr</text>
+                            <text x="185" y="242" font-size="13" text-anchor="middle" fill="#64748b">May</text>
+                            <text x="270" y="242" font-size="13" text-anchor="middle" fill="#64748b">Jun</text>
+                            <text x="355" y="242" font-size="13" text-anchor="middle" fill="#64748b">Jul</text>
+                            <text x="440" y="242" font-size="13" text-anchor="middle" fill="#64748b">Aug</text>
+                            <text x="525" y="242" font-size="13" text-anchor="middle" fill="#64748b">Sep</text>
+                        </svg>
+                    </section>
+                </div>
+
+                <!-- ================= LOW STOCK (progress bars) ================= -->
+                <div class="col-xl-4">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Low Stock Alert</h2>
+                            <a href="manage-medicines.html" class="btn btn-sm btn-outline-brand">Manage</a>
+                        </div>
+                        <p class="stock-row">Paracetamol 500 mg <span>12 / 200</span></p>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-danger" style="width:6%"></div>
+                        </div>
+                        <p class="stock-row">Cough Relief Syrup <span>25 / 150</span></p>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-danger" style="width:17%"></div>
+                        </div>
+                        <p class="stock-row">Vitamin C + Zinc <span>40 / 120</span></p>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-warning" style="width:33%"></div>
+                        </div>
+                        <p class="stock-row">Digital Thermometer <span>18 / 50</span></p>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-warning" style="width:36%"></div>
+                        </div>
+                        <p class="stock-row">Eye Drops 10 ml <span>45 / 100</span></p>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width:45%"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- ================= RECENT ORDERS TABLE ================= -->
+                <div class="col-xl-8">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Recent Orders</h2>
+                            <a href="manage-orders.html" class="btn btn-sm btn-brand">View All</a>
+                        </div>
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>#MK1052</td><td>Riya Shah</td><td>07 Oct 2026</td><td>&#8377;540</td><td><span class="status status-pending">Pending</span></td></tr>
+                                    <tr><td>#MK1051</td><td>Arjun Mehta</td><td>07 Oct 2026</td><td>&#8377;1,899</td><td><span class="status status-processing">Processing</span></td></tr>
+                                    <tr><td>#MK1050</td><td>Neha Patel</td><td>06 Oct 2026</td><td>&#8377;325</td><td><span class="status status-shipped">Shipped</span></td></tr>
+                                    <tr><td>#MK1049</td><td>Karan Vyas</td><td>06 Oct 2026</td><td>&#8377;780</td><td><span class="status status-delivered">Delivered</span></td></tr>
+                                    <tr><td>#MK1048</td><td>Pooja Rana</td><td>05 Oct 2026</td><td>&#8377;199</td><td><span class="status status-cancelled">Cancelled</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- ================= PRESCRIPTIONS TO VERIFY (list group) ================= -->
+                <div class="col-xl-4">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Prescriptions to Verify</h2>
+                            <a href="prescriptions.html" class="btn btn-sm btn-outline-brand">View All</a>
+                        </div>
+                        <div class="list-group">
+                            <a href="prescriptions.html" class="list-group-item list-group-item-action">
+                                <strong>#MK1052</strong> &ndash; Riya Shah<br><small class="text-muted">Amoxicillin 500 mg &bull; 10 min ago</small>
+                            </a>
+                            <a href="prescriptions.html" class="list-group-item list-group-item-action">
+                                <strong>#MK1046</strong> &ndash; Vivek Soni<br><small class="text-muted">Metformin 500 mg &bull; 1 hr ago</small>
+                            </a>
+                            <a href="prescriptions.html" class="list-group-item list-group-item-action">
+                                <strong>#MK1043</strong> &ndash; Hetal Joshi<br><small class="text-muted">Atorvastatin 10 mg &bull; 3 hr ago</small>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS bundle (sidebar collapse, modals) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

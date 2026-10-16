@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Admin/reports.html  (ADMIN 5 - Reports and store settings)
+    Uses    : Forms (date, select, color, range, checkbox, number), stacked progress bars, numbered list group, HTML table with rowspan, accordion, CSS grid stat cards
+    Layout  : Common admin layout = dark sidebar (left) + top bar + content area
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediKart Admin | Reports &amp; Settings</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="admin-body">
+<div class="admin-wrapper">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-top">
+            <a href="dashboard.html" class="brand">
+                <img src="../images/logo.svg" alt="MediKart logo" width="34" height="34">
+                <span>MediKart <small>ADMIN</small></span>
+            </a>
+            <!-- Toggle button: visible below 992px only (see admin.css) -->
+            <button class="sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"
+                    aria-controls="adminMenu" aria-expanded="false" aria-label="Toggle admin menu">&#9776;</button>
+        </div>
+
+        <nav id="adminMenu" class="collapse">
+            <p class="sidebar-label">Main Menu</p>
+            <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html"><span>&#9632;</span> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-medicines.html"><span>&#10010;</span> Manage Medicines</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html"><span>&#9776;</span> Orders &amp; Customers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="prescriptions.html"><span>&#9998;</span> Prescriptions</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="reports.html" aria-current="page"><span>&#9881;</span> Reports &amp; Settings</a></li>
+            </ul>
+            <p class="sidebar-label">Other</p>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="../Client/index.html" target="_blank"><span>&#8599;</span> View Website</a></li>
+                <li class="nav-item"><a class="nav-link logout" href="../Client/account.html"><span>&#10162;</span> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ================= MAIN AREA ================= -->
+    <div class="admin-main">
+        <!-- Top bar: page title, breadcrumb and logged-in admin -->
+        <header class="admin-topbar">
+            <div>
+                <h1>Reports &amp; Settings</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.html">Admin</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Reports &amp; Settings</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="admin-user">
+                <img src="../images/avatar.svg" alt="Admin photo">
+                <span><strong>Kavya Desai</strong><br><small class="text-muted">Administrator</small></span>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <!-- ================= REPORT FILTER ================= -->
+            <section class="panel">
+                <form class="row align-items-end" action="reports.html" method="get">
+                    <div class="col-sm-6 col-lg-3 mb-2">
+                        <label for="fromDate" class="form-label">From</label>
+                        <input type="date" class="form-control" id="fromDate" name="from" value="2026-09-01">
+                    </div>
+                    <div class="col-sm-6 col-lg-3 mb-2">
+                        <label for="toDate" class="form-label">To</label>
+                        <input type="date" class="form-control" id="toDate" name="to" value="2026-09-30">
+                    </div>
+                    <div class="col-sm-6 col-lg-3 mb-2">
+                        <label for="reportType" class="form-label">Report Type</label>
+                        <select class="form-select" id="reportType" name="type">
+                            <option>Sales Summary</option>
+                            <option>Category-wise Sales</option>
+                            <option>Stock Report</option>
+                            <option>Customer Report</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-lg-3 mb-2">
+                        <button type="submit" class="btn btn-brand w-100">Generate Report</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ================= SUMMARY CARDS ================= -->
+            <section class="stat-cards">
+                <article class="stat-card"><p>Revenue (Sep)</p><h3>&#8377;4.3 L</h3><small class="up">&#9650; 13% vs Aug</small></article>
+                <article class="stat-card orange"><p>Orders (Sep)</p><h3>2,870</h3><small class="up">&#9650; 9% vs Aug</small></article>
+                <article class="stat-card blue"><p>Avg. Order Value</p><h3>&#8377;150</h3><small class="up">&#9650; &#8377;6</small></article>
+                <article class="stat-card red"><p>Returns</p><h3>1.2%</h3><small class="down">&#9660; 0.3% vs Aug</small></article>
+            </section>
+
+            <div class="row">
+                <!-- ================= CATEGORY SHARE (stacked progress) ================= -->
+                <div class="col-lg-7">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Sales Share by Category</h2>
+                        </div>
+                        <div class="progress mb-3" style="height:28px">
+                            <div class="progress-bar bg-success" style="width:35%">35%</div>
+                            <div class="progress-bar bg-info" style="width:20%">20%</div>
+                            <div class="progress-bar bg-warning" style="width:18%">18%</div>
+                            <div class="progress-bar bg-danger" style="width:15%">15%</div>
+                            <div class="progress-bar bg-secondary" style="width:12%">12%</div>
+                        </div>
+                        <ul class="list-inline small">
+                            <li class="list-inline-item"><span class="text-success">&#9632;</span> Prescription</li>
+                            <li class="list-inline-item"><span class="text-info">&#9632;</span> Fever &amp; Pain</li>
+                            <li class="list-inline-item"><span class="text-warning">&#9632;</span> Vitamins</li>
+                            <li class="list-inline-item"><span class="text-danger">&#9632;</span> Devices</li>
+                            <li class="list-inline-item"><span class="text-secondary">&#9632;</span> Others</li>
+                        </ul>
+
+                        <!-- Sales summary table with rowspan -->
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <caption>Quarter-wise Sales Summary (2026)</caption>
+                                <thead>
+                                    <tr><th>Quarter</th><th>Month</th><th>Orders</th><th>Revenue (&#8377;)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><th rowspan="3">Q2</th><td>April</td><td>1,410</td><td>2,10,000</td></tr>
+                                    <tr><td>May</td><td>1,730</td><td>2,60,000</td></tr>
+                                    <tr><td>June</td><td>1,600</td><td>2,40,000</td></tr>
+                                    <tr><th rowspan="3">Q3</th><td>July</td><td>2,130</td><td>3,20,000</td></tr>
+                                    <tr><td>August</td><td>2,630</td><td>3,80,000</td></tr>
+                                    <tr><td>September</td><td>2,870</td><td>4,30,000</td></tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr><th colspan="2">Total</th><th>12,370</th><th>18,40,000</th></tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- ================= TOP SELLING (numbered list group) ================= -->
+                <div class="col-lg-5">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Top 5 Selling Products</h2>
+                        </div>
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item">Paracetamol 500 mg &ndash; <strong>3,240</strong> sold</li>
+                            <li class="list-group-item">Vitamin C + Zinc &ndash; <strong>1,980</strong> sold</li>
+                            <li class="list-group-item">Cough Relief Syrup &ndash; <strong>1,450</strong> sold</li>
+                            <li class="list-group-item">Metformin 500 mg &ndash; <strong>1,210</strong> sold</li>
+                            <li class="list-group-item">Hand Sanitizer 500 ml &ndash; <strong>980</strong> sold</li>
+                        </ol>
+                    </section>
+                </div>
+            </div>
+
+            <!-- ================= STORE SETTINGS (accordion) ================= -->
+            <section class="panel" id="settings">
+                <div class="panel-head">
+                    <h2>Store Settings</h2>
+                </div>
+                <form action="reports.html" method="post">
+                    <div class="accordion mb-3" id="settingsAccordion">
+                        <!-- General settings -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#setGeneral"
+                                        aria-expanded="true" aria-controls="setGeneral">General</button>
+                            </h3>
+                            <div id="setGeneral" class="accordion-collapse collapse show" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="storeName" class="form-label required">Store Name</label>
+                                            <input type="text" class="form-control" id="storeName" name="store_name" value="MediKart" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="storeEmail" class="form-label required">Support Email</label>
+                                            <input type="email" class="form-control" id="storeEmail" name="store_email" value="support@medikart.in" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="storePhone" class="form-label">Support Phone</label>
+                                            <input type="tel" class="form-control" id="storePhone" name="store_phone" value="9876543210" pattern="[6-9][0-9]{9}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="licenseNo" class="form-label">Drug License No.</label>
+                                            <input type="text" class="form-control" id="licenseNo" name="license_no" value="GJ-RJT-20B-12345" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="themeColor" class="form-label">Theme Colour</label>
+                                            <input type="color" class="form-control form-control-color" id="themeColor" name="theme_color" value="#0f766e" title="Choose theme colour">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="storeLogo" class="form-label">Store Logo</label>
+                                            <input type="file" class="form-control" id="storeLogo" name="logo" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Delivery & tax settings -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#setDelivery"
+                                        aria-expanded="false" aria-controls="setDelivery">Delivery &amp; Tax</button>
+                            </h3>
+                            <div id="setDelivery" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="deliveryCharge" class="form-label">Delivery Charge (&#8377;)</label>
+                                            <input type="number" class="form-control" id="deliveryCharge" name="delivery_charge" value="40" min="0">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="freeAbove" class="form-label">Free Delivery Above (&#8377;)</label>
+                                            <input type="number" class="form-control" id="freeAbove" name="free_above" value="499" min="0">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="gst" class="form-label">GST on Medicines (%)</label>
+                                            <input type="number" class="form-control" id="gst" name="gst" value="12" min="0" max="28">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="lowStock" class="form-label">Low Stock Alert Level (0 &ndash; 100 units)</label>
+                                            <input type="range" class="form-range" id="lowStock" name="low_stock" min="0" max="100" value="30">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Notification settings -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#setNotify"
+                                        aria-expanded="false" aria-controls="setNotify">Notifications &amp; Payments</button>
+                            </h3>
+                            <div id="setNotify" class="accordion-collapse collapse" data-bs-parent="#settingsAccordion">
+                                <div class="accordion-body">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifyOrder" name="notify_order" checked>
+                                        <label class="form-check-label" for="notifyOrder">Email me on every new order</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifyStock" name="notify_stock" checked>
+                                        <label class="form-check-label" for="notifyStock">Alert when stock is low</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="allowCod" name="allow_cod" checked>
+                                        <label class="form-check-label" for="allowCod">Allow Cash on Delivery</label>
+                                    </div>
+                                    <label for="payModes" class="form-label">Online Payment Modes (hold Ctrl to select many)</label>
+                                    <select class="form-select" id="payModes" name="pay_modes" multiple>
+                                        <option selected>UPI</option>
+                                        <option selected>Debit / Credit Card</option>
+                                        <option>Net Banking</option>
+                                        <option>Wallet</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-brand">Save Settings</button>
+                    <button type="reset" class="btn btn-outline-brand">Reset</button>
+                </form>
+            </section>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS bundle (sidebar collapse, modals) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

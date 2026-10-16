@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Admin/manage-orders.html  (ADMIN 3 - Manage orders and customers)
+    Uses    : Bootstrap nav pills, HTML tables, modal (order details + status update), list group, forms, pagination
+    Layout  : Common admin layout = dark sidebar (left) + top bar + content area
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediKart Admin | Orders &amp; Customers</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="admin-body">
+<div class="admin-wrapper">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-top">
+            <a href="dashboard.html" class="brand">
+                <img src="../images/logo.svg" alt="MediKart logo" width="34" height="34">
+                <span>MediKart <small>ADMIN</small></span>
+            </a>
+            <!-- Toggle button: visible below 992px only (see admin.css) -->
+            <button class="sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"
+                    aria-controls="adminMenu" aria-expanded="false" aria-label="Toggle admin menu">&#9776;</button>
+        </div>
+
+        <nav id="adminMenu" class="collapse">
+            <p class="sidebar-label">Main Menu</p>
+            <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html"><span>&#9632;</span> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-medicines.html"><span>&#10010;</span> Manage Medicines</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="manage-orders.html" aria-current="page"><span>&#9776;</span> Orders &amp; Customers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="prescriptions.html"><span>&#9998;</span> Prescriptions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html"><span>&#9881;</span> Reports &amp; Settings</a></li>
+            </ul>
+            <p class="sidebar-label">Other</p>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="../Client/index.html" target="_blank"><span>&#8599;</span> View Website</a></li>
+                <li class="nav-item"><a class="nav-link logout" href="../Client/account.html"><span>&#10162;</span> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ================= MAIN AREA ================= -->
+    <div class="admin-main">
+        <!-- Top bar: page title, breadcrumb and logged-in admin -->
+        <header class="admin-topbar">
+            <div>
+                <h1>Orders &amp; Customers</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.html">Admin</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Orders &amp; Customers</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="admin-user">
+                <img src="../images/avatar.svg" alt="Admin photo">
+                <span><strong>Kavya Desai</strong><br><small class="text-muted">Administrator</small></span>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <!-- ================= ORDERS ================= -->
+            <section class="panel">
+                <div class="panel-head">
+                    <h2>All Orders (Last 7 Days)</h2>
+                    <form class="admin-toolbar" action="manage-orders.html" method="get">
+                        <label for="orderSearch" class="visually-hidden">Search orders</label>
+                        <input type="search" class="form-control" id="orderSearch" name="q" placeholder="Order ID / customer">
+                        <label for="orderDate" class="visually-hidden">Order date</label>
+                        <input type="date" class="form-control" id="orderDate" name="date">
+                        <button type="submit" class="btn btn-outline-brand">Filter</button>
+                    </form>
+                </div>
+
+                <!-- Status filter (Bootstrap nav pills used as links) -->
+                <ul class="nav nav-pills mb-3">
+                    <li class="nav-item"><a class="nav-link active" href="manage-orders.html">All (1,052)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html?status=pending">Pending (14)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html?status=processing">Processing (22)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html?status=shipped">Shipped (31)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html?status=delivered">Delivered (968)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html?status=cancelled">Cancelled (17)</a></li>
+                </ul>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Payment</th>
+                                <th>Prescription</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#MK1052</td><td>Riya Shah</td><td>07 Oct 2026</td><td>3</td><td>&#8377;540</td><td>UPI</td>
+                                <td><span class="tag tag-rx">Required</span></td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#orderModal">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#MK1051</td><td>Arjun Mehta</td><td>07 Oct 2026</td><td>1</td><td>&#8377;1,899</td><td>Card</td>
+                                <td><span class="tag tag-otc">Not needed</span></td>
+                                <td><span class="status status-processing">Processing</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#orderModal">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#MK1050</td><td>Neha Patel</td><td>06 Oct 2026</td><td>4</td><td>&#8377;325</td><td>COD</td>
+                                <td><span class="tag tag-otc">Not needed</span></td>
+                                <td><span class="status status-shipped">Shipped</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#orderModal">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#MK1049</td><td>Karan Vyas</td><td>06 Oct 2026</td><td>2</td><td>&#8377;780</td><td>UPI</td>
+                                <td><span class="tag tag-stock">Verified</span></td>
+                                <td><span class="status status-delivered">Delivered</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#orderModal">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#MK1048</td><td>Pooja Rana</td><td>05 Oct 2026</td><td>1</td><td>&#8377;199</td><td>Card</td>
+                                <td><span class="tag tag-otc">Not needed</span></td>
+                                <td><span class="status status-cancelled">Cancelled</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#orderModal">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#MK1047</td><td>Vivek Soni</td><td>05 Oct 2026</td><td>5</td><td>&#8377;1,120</td><td>Net Banking</td>
+                                <td><span class="tag tag-stock">Verified</span></td>
+                                <td><span class="status status-delivered">Delivered</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#orderModal">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav aria-label="Order pages" class="mt-3">
+                    <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+                        <li class="page-item"><a class="page-link" href="#">176</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <!-- ================= CUSTOMERS ================= -->
+            <section class="panel" id="customers">
+                <div class="panel-head">
+                    <h2>Registered Customers</h2>
+                    <span class="text-muted small">Total: 52,840</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>City</th>
+                                <th>Orders</th>
+                                <th>Joined</th>
+                                <th>Account</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>C10215</td><td>Riya Shah</td><td>riya.shah@example.com</td><td>98250 11223</td><td>Ahmedabad</td><td>14</td><td>Jan 2025</td><td><span class="status status-delivered">Active</span></td></tr>
+                            <tr><td>C11873</td><td>Arjun Mehta</td><td>arjun.m@example.com</td><td>99090 44556</td><td>Rajkot</td><td>6</td><td>Mar 2025</td><td><span class="status status-delivered">Active</span></td></tr>
+                            <tr><td>C12406</td><td>Neha Patel</td><td>neha.p@example.com</td><td>97230 77889</td><td>Surat</td><td>9</td><td>Apr 2025</td><td><span class="status status-delivered">Active</span></td></tr>
+                            <tr><td>C14390</td><td>Karan Vyas</td><td>karan.v@example.com</td><td>90990 12121</td><td>Rajkot</td><td>3</td><td>Jun 2025</td><td><span class="status status-delivered">Active</span></td></tr>
+                            <tr><td>C15112</td><td>Pooja Rana</td><td>pooja.r@example.com</td><td>94270 65432</td><td>Vadodara</td><td>2</td><td>Jul 2025</td><td><span class="status status-cancelled">Blocked</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ================= ORDER DETAILS MODAL ================= -->
+            <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="orderTitle">Order #MK1052</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="fw-bold">Customer</h6>
+                                    <address class="mb-0">
+                                        Riya Shah<br>
+                                        B-14, Shanti Nagar, Navrangpura,<br>Ahmedabad - 380009<br>
+                                        &#9742; 98250 11223
+                                    </address>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6 class="fw-bold">Order Info</h6>
+                                    <p class="mb-0">Date: 07 Oct 2026, 10:24 AM<br>Payment: UPI (Paid)<br>Prescription: <a href="#">prescription_1052.jpg</a></p>
+                                </div>
+                            </div>
+                            <div class="table-wrap mb-3">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Medicine</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Amoxicillin 500 mg Capsule</td><td>2</td><td>&#8377;120</td><td>&#8377;240</td></tr>
+                                        <tr><td>Paracetamol 500 mg Tablet</td><td>5</td><td>&#8377;30</td><td>&#8377;150</td></tr>
+                                        <tr><td>Hand Sanitizer 500 ml</td><td>1</td><td>&#8377;160</td><td>&#8377;160</td></tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr><th colspan="3">Discount</th><th>&ndash; &#8377;10</th></tr>
+                                        <tr><th colspan="3">Grand Total</th><th>&#8377;540</th></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <!-- Update status form -->
+                            <form class="row align-items-end" action="manage-orders.html" method="post">
+                                <div class="col-sm-5 mb-2">
+                                    <label for="newStatus" class="form-label fw-bold">Update Status</label>
+                                    <select class="form-select" id="newStatus" name="status">
+                                        <option selected>Pending</option>
+                                        <option>Processing</option>
+                                        <option>Shipped</option>
+                                        <option>Delivered</option>
+                                        <option>Cancelled</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-7 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rxVerified" name="rx_verified">
+                                        <label class="form-check-label" for="rxVerified">Prescription verified by pharmacist</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-brand">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS bundle (sidebar collapse, modals) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

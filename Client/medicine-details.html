@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Client/medicine-details.html  (CLIENT 3 - Medicine detail page)
+    Uses    : Bootstrap grid, breadcrumb, forms, modal, accordion, list group, cards; HTML table with caption; HTML5 validation (min, max, pattern, required)
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Details, price and usage of Paracetamol 500 mg tablet.">
+    <title>MediKart | Paracetamol 500 mg Tablet</title>
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Our own stylesheet (loaded after Bootstrap so it can override it) -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body id="top">
+
+    <!-- ================= TOP INFO BAR ================= -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span>&#9742; +91 98765 43210</span>
+            <span>&#9993; support@medikart.in</span>
+            <span class="top-bar-note">Free delivery on orders above &#8377;499</span>
+        </div>
+    </div>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand brand" href="index.html">
+                    <img src="../images/logo.svg" alt="MediKart logo" width="40" height="40">
+                    <span>Medi<b>Kart</b></span>
+                </a>
+                <!-- Hamburger button (shown below 992px) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu"
+                        aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="medicines.html">Medicines</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">About &amp; Contact</a></li>
+                        <li class="nav-item"><a class="nav-link nav-btn" href="account.html">Login / Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ================= PAGE BANNER + BREADCRUMB ================= -->
+        <section class="page-banner">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="medicines.html">Medicines</a></li>
+                        <li class="breadcrumb-item"><a href="medicines.html">Fever &amp; Pain</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Paracetamol 500 mg</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- ================= PRODUCT MAIN INFO ================= -->
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <!-- Product image -->
+                    <div class="col-md-5 mb-4">
+                        <figure class="detail-image">
+                            <img src="../images/tablet-strip.svg" alt="Paracetamol 500 mg tablet strip" width="380" height="380">
+                            <figcaption class="thumb-list">
+                                <img src="../images/tablet-strip.svg" alt="Front view">
+                                <img src="../images/tablet-strip-green.svg" alt="Back view">
+                                <img src="../images/capsule-bottle.svg" alt="Box view">
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <!-- Product information -->
+                    <div class="col-md-7">
+                        <span class="tag tag-otc">OTC</span>
+                        <span class="tag tag-stock">In Stock</span>
+                        <h1 class="h2 mt-2">Paracetamol 500 mg Tablet</h1>
+                        <p class="text-muted">By <strong>HealthFirst Pharma Ltd.</strong> &bull; Strip of 15 tablets</p>
+                        <p class="stars mb-1">&#9733;&#9733;&#9733;&#9733;&#9734; <small class="text-muted">(248 ratings)</small></p>
+
+                        <p class="price-big">&#8377;30 <del>&#8377;35</del> <mark>Save 14%</mark></p>
+                        <p class="text-muted small">Inclusive of all taxes</p>
+
+                        <!-- Add to cart form (HTML5 validation with min / max / required) -->
+                        <form action="medicine-details.html" method="post">
+                            <h6 class="fw-bold">Pack Size</h6>
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" id="pack15" name="pack" value="15" checked>
+                                    <label class="form-check-label" for="pack15">15 Tablets</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" id="pack30" name="pack" value="30">
+                                    <label class="form-check-label" for="pack30">30 Tablets (&#8377;58)</label>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-end">
+                                <div class="col-auto mb-3">
+                                    <label for="qty" class="form-label fw-bold">Quantity</label>
+                                    <input type="number" class="form-control qty-input" id="qty" name="qty" value="1" min="1" max="10" required>
+                                </div>
+                                <div class="col-auto mb-3">
+                                    <!-- Opens the "Added to cart" modal -->
+                                    <button type="button" class="btn btn-brand btn-lg" data-bs-toggle="modal" data-bs-target="#cartModal">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Delivery check form (pattern = 6 digit pincode) -->
+                        <form class="row mb-3" action="medicine-details.html" method="get">
+                            <div class="col-sm-7 mb-2">
+                                <label for="pincode" class="visually-hidden">Pincode</label>
+                                <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Enter 6-digit pincode"
+                                       pattern="[0-9]{6}" title="Pincode must be 6 digits" required>
+                            </div>
+                            <div class="col-sm-5 mb-2">
+                                <button type="submit" class="btn btn-outline-brand w-100">Check Delivery</button>
+                            </div>
+                        </form>
+
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item">&#10003; Delivery in 24 hours in Rajkot</li>
+                            <li class="list-group-item">&#10003; Cash on delivery available</li>
+                            <li class="list-group-item">&#10003; 7-day easy return on sealed packs</li>
+                        </ul>
+
+                        <p class="info-note"><strong>Note:</strong> Do not take more than 4 grams of paracetamol in 24 hours. Consult a doctor if fever lasts more than 3 days.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DESCRIPTION ACCORDION + INFO TABLE ================= -->
+        <section class="section section-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 mb-4">
+                        <h2 class="h4 mb-3">Product Details</h2>
+                        <div class="accordion" id="detailAccordion">
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#descOne"
+                                            aria-expanded="true" aria-controls="descOne">Description</button>
+                                </h3>
+                                <div id="descOne" class="accordion-collapse collapse show" data-bs-parent="#detailAccordion">
+                                    <div class="accordion-body">
+                                        Paracetamol 500 mg is a common pain reliever and fever reducer. It is used to treat headache,
+                                        body ache, tooth pain and fever caused by cold or flu.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#descTwo"
+                                            aria-expanded="false" aria-controls="descTwo">Uses</button>
+                                </h3>
+                                <div id="descTwo" class="accordion-collapse collapse" data-bs-parent="#detailAccordion">
+                                    <div class="accordion-body">
+                                        <ul>
+                                            <li>Fever</li>
+                                            <li>Headache and migraine</li>
+                                            <li>Body and muscle pain</li>
+                                            <li>Toothache</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#descThree"
+                                            aria-expanded="false" aria-controls="descThree">Dosage</button>
+                                </h3>
+                                <div id="descThree" class="accordion-collapse collapse" data-bs-parent="#detailAccordion">
+                                    <div class="accordion-body">
+                                        Adults: 1 tablet every 4&ndash;6 hours if needed. Do not take more than 8 tablets in 24 hours.
+                                        Children: only as advised by a doctor.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#descFour"
+                                            aria-expanded="false" aria-controls="descFour">Side Effects &amp; Storage</button>
+                                </h3>
+                                <div id="descFour" class="accordion-collapse collapse" data-bs-parent="#detailAccordion">
+                                    <div class="accordion-body">
+                                        Side effects are rare: nausea, skin rash. Store below 25&deg;C in a dry place, away from children.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <caption>Product Information</caption>
+                                <tbody>
+                                    <tr><th scope="row">Composition</th><td>Paracetamol IP 500 mg</td></tr>
+                                    <tr><th scope="row">Manufacturer</th><td>HealthFirst Pharma Ltd.</td></tr>
+                                    <tr><th scope="row">Form</th><td>Tablet</td></tr>
+                                    <tr><th scope="row">Pack Size</th><td>15 tablets / strip</td></tr>
+                                    <tr><th scope="row">Prescription</th><td>Not required</td></tr>
+                                    <tr><th scope="row">Expiry</th><td><time datetime="2028-03">March 2028</time></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RELATED PRODUCTS ================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Related Products</h2>
+                </div>
+                <div class="product-grid">
+                    <div class="card product-card">
+                        <img src="../images/syrup.svg" class="card-img-top" alt="Cough relief syrup">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="medicine-details.html">Cough Relief Syrup</a></h5>
+                            <p class="price">&#8377;95 <del>&#8377;110</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                    <div class="card product-card">
+                        <img src="../images/thermometer.svg" class="card-img-top" alt="Digital thermometer">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="medicine-details.html">Digital Thermometer</a></h5>
+                            <p class="price">&#8377;199 <del>&#8377;250</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                    <div class="card product-card">
+                        <img src="../images/vitamin-jar.svg" class="card-img-top" alt="Vitamin C and Zinc tablets">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="medicine-details.html">Vitamin C + Zinc Tablets</a></h5>
+                            <p class="price">&#8377;249 <del>&#8377;299</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                    <div class="card product-card">
+                        <img src="../images/mask.svg" class="card-img-top" alt="Face mask pack">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="medicine-details.html">3-Ply Face Mask (50)</a></h5>
+                            <p class="price">&#8377;150 <del>&#8377;199</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ADDED TO CART MODAL ================= -->
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalTitle" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="cartModalTitle">&#10003; Added to Cart</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Paracetamol 500 mg Tablet</strong> has been added to your cart.</p>
+                        <p class="text-muted mb-0">Please login to place the order. (Cart will work fully after the backend phase.)</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-brand" data-bs-dismiss="modal">Continue Shopping</button>
+                        <a href="account.html" class="btn btn-brand">Login to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Medi<span class="text-warning">Kart</span></h5>
+                    <p>MediKart is an online pharmacy that delivers genuine medicines and health products, checked by licensed pharmacists.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="medicines.html">Medicines</a></li>
+                        <li><a href="contact.html">About Us</a></li>
+                        <li><a href="account.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="medicines.html">Fever &amp; Pain</a></li>
+                        <li><a href="medicines.html">Vitamins</a></li>
+                        <li><a href="medicines.html">Devices</a></li>
+                        <li><a href="medicines.html">Skin Care</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Contact Us</h5>
+                    <address>
+                        12, Health Plaza, Kalawad Road,<br>Rajkot, Gujarat - 360005<br>
+                        &#9742; +91 98765 43210<br>
+                        &#9993; support@medikart.in
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 MediKart. Web Technology Term Work.</span>
+                <a href="../Admin/dashboard.html">Admin Panel</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#top" class="back-to-top" title="Back to top">&#8679;</a>
+
+    <!-- Bootstrap JS bundle (needed for navbar toggle, carousel, modal, collapse) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

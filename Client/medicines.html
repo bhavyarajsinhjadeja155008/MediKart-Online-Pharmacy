@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Client/medicines.html  (CLIENT 2 - Medicines listing / catalog)
+    Uses    : Bootstrap grid, breadcrumb, collapse, form controls (select, checkbox, radio, range), cards, pagination; CSS grid for products
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Browse and filter all medicines and health products.">
+    <title>MediKart | Medicines</title>
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Our own stylesheet (loaded after Bootstrap so it can override it) -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body id="top">
+
+    <!-- ================= TOP INFO BAR ================= -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span>&#9742; +91 98765 43210</span>
+            <span>&#9993; support@medikart.in</span>
+            <span class="top-bar-note">Free delivery on orders above &#8377;499</span>
+        </div>
+    </div>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand brand" href="index.html">
+                    <img src="../images/logo.svg" alt="MediKart logo" width="40" height="40">
+                    <span>Medi<b>Kart</b></span>
+                </a>
+                <!-- Hamburger button (shown below 992px) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu"
+                        aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="medicines.html">Medicines</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">About &amp; Contact</a></li>
+                        <li class="nav-item"><a class="nav-link nav-btn" href="account.html">Login / Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ================= PAGE BANNER + BREADCRUMB ================= -->
+        <section class="page-banner">
+            <div class="container">
+                <h1>All Medicines</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Medicines</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+
+                    <!-- ================= FILTER SIDEBAR ================= -->
+                    <aside class="col-lg-3 mb-4">
+                        <!-- Button only visible on small screens (hidden by media query in style.css) -->
+                        <button class="btn btn-outline-brand filter-toggle" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#filterPanel" aria-expanded="false" aria-controls="filterPanel">
+                            &#9776; Show Filters
+                        </button>
+
+                        <div class="collapse" id="filterPanel">
+                            <form class="filter-box" action="medicines.html" method="get">
+                                <label for="search" class="form-label fw-bold">Search</label>
+                                <input type="search" class="form-control" id="search" name="q" placeholder="Medicine name...">
+
+                                <h6>Category</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="catPain" name="category" value="pain">
+                                    <label class="form-check-label" for="catPain">Fever &amp; Pain</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="catCold" name="category" value="cold">
+                                    <label class="form-check-label" for="catCold">Cold &amp; Cough</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="catVit" name="category" value="vitamins">
+                                    <label class="form-check-label" for="catVit">Vitamins</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="catDev" name="category" value="devices">
+                                    <label class="form-check-label" for="catDev">Health Devices</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="catSkin" name="category" value="skin">
+                                    <label class="form-check-label" for="catSkin">Skin Care</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="catPersonal" name="category" value="personal">
+                                    <label class="form-check-label" for="catPersonal">Personal Care</label>
+                                </div>
+
+                                <h6>Medicine Type</h6>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="typeAll" name="type" value="all" checked>
+                                    <label class="form-check-label" for="typeAll">All</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="typeOtc" name="type" value="otc">
+                                    <label class="form-check-label" for="typeOtc">OTC (no prescription)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="typeRx" name="type" value="rx">
+                                    <label class="form-check-label" for="typeRx">Rx (prescription needed)</label>
+                                </div>
+
+                                <h6><label for="maxPrice">Max Price (&#8377;0 - &#8377;2500)</label></h6>
+                                <input type="range" class="form-range" id="maxPrice" name="max_price" min="0" max="2500" step="50" value="2500">
+
+                                <h6>Brand</h6>
+                                <select class="form-select" name="brand" aria-label="Brand">
+                                    <option value="">All brands</option>
+                                    <option>HealthFirst</option>
+                                    <option>CureWell</option>
+                                    <option>VitaLife</option>
+                                    <option>MediTech</option>
+                                </select>
+
+                                <button type="submit" class="btn btn-brand w-100 mt-4">Apply Filters</button>
+                                <button type="reset" class="btn btn-link w-100">Clear all</button>
+                            </form>
+                        </div>
+                    </aside>
+
+                    <!-- ================= PRODUCT LIST ================= -->
+                    <div class="col-lg-9">
+                        <!-- Toolbar: result count + sorting -->
+                        <div class="list-toolbar">
+                            <p>Showing <strong>1&ndash;9</strong> of <strong>48</strong> products</p>
+                            <form action="medicines.html" method="get">
+                                <label for="sortBy" class="visually-hidden">Sort by</label>
+                                <select class="form-select" id="sortBy" name="sort">
+                                    <option value="popular">Sort: Popularity</option>
+                                    <option value="low">Price: Low to High</option>
+                                    <option value="high">Price: High to Low</option>
+                                    <option value="new">Newest First</option>
+                                </select>
+                            </form>
+                        </div>
+
+                        <div class="product-grid">
+                            <!-- 1 -->
+                            <div class="card product-card">
+                                <span class="discount-label">14% OFF</span>
+                                <img src="../images/tablet-strip.svg" class="card-img-top" alt="Paracetamol 500 mg tablets">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">OTC</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Paracetamol 500 mg Tablet</a></h5>
+                                    <p class="product-meta">HealthFirst &bull; Strip of 15</p>
+                                    <p class="price">&#8377;30 <del>&#8377;35</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 2 -->
+                            <div class="card product-card">
+                                <img src="../images/syrup.svg" class="card-img-top" alt="Cough relief syrup">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">OTC</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Cough Relief Syrup</a></h5>
+                                    <p class="product-meta">CureWell &bull; 100 ml</p>
+                                    <p class="price">&#8377;95 <del>&#8377;110</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 3 -->
+                            <div class="card product-card">
+                                <span class="discount-label">17% OFF</span>
+                                <img src="../images/vitamin-jar.svg" class="card-img-top" alt="Vitamin C and Zinc tablets">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">OTC</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Vitamin C + Zinc Tablets</a></h5>
+                                    <p class="product-meta">VitaLife &bull; 60 tablets</p>
+                                    <p class="price">&#8377;249 <del>&#8377;299</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 4 -->
+                            <div class="card product-card">
+                                <img src="../images/capsule-bottle.svg" class="card-img-top" alt="Amoxicillin 500 mg capsules">
+                                <div class="card-body">
+                                    <span class="tag tag-rx">Rx</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Amoxicillin 500 mg Capsule</a></h5>
+                                    <p class="product-meta">CureWell &bull; 10 capsules</p>
+                                    <p class="price">&#8377;120 <del>&#8377;140</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 5 -->
+                            <div class="card product-card">
+                                <span class="discount-label">20% OFF</span>
+                                <img src="../images/thermometer.svg" class="card-img-top" alt="Digital thermometer">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">Device</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Digital Thermometer</a></h5>
+                                    <p class="product-meta">MediTech &bull; 1 unit</p>
+                                    <p class="price">&#8377;199 <del>&#8377;250</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 6 -->
+                            <div class="card product-card">
+                                <span class="discount-label">24% OFF</span>
+                                <img src="../images/bp-monitor.svg" class="card-img-top" alt="Automatic BP monitor">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">Device</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Automatic BP Monitor</a></h5>
+                                    <p class="product-meta">MediTech &bull; 1 unit</p>
+                                    <p class="price">&#8377;1,899 <del>&#8377;2,499</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 7 -->
+                            <div class="card product-card">
+                                <img src="../images/cream-tube.svg" class="card-img-top" alt="Moisturising skin cream">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">OTC</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Moisturising Skin Cream</a></h5>
+                                    <p class="product-meta">HealthFirst &bull; 50 g</p>
+                                    <p class="price">&#8377;180 <del>&#8377;210</del></p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 8 -->
+                            <div class="card product-card">
+                                <img src="../images/eye-drops.svg" class="card-img-top" alt="Lubricant eye drops">
+                                <div class="card-body">
+                                    <span class="tag tag-otc">OTC</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Lubricant Eye Drops</a></h5>
+                                    <p class="product-meta">CureWell &bull; 10 ml</p>
+                                    <p class="price">&#8377;145</p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                            <!-- 9 -->
+                            <div class="card product-card">
+                                <img src="../images/tablet-strip-green.svg" class="card-img-top" alt="Metformin 500 mg tablets">
+                                <div class="card-body">
+                                    <span class="tag tag-rx">Rx</span>
+                                    <h5 class="card-title"><a href="medicine-details.html">Metformin 500 mg Tablet</a></h5>
+                                    <p class="product-meta">HealthFirst &bull; Strip of 20</p>
+                                    <p class="price">&#8377;45</p>
+                                    <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= PAGINATION ================= -->
+                        <nav aria-label="Product pages" class="mt-5">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Medi<span class="text-warning">Kart</span></h5>
+                    <p>MediKart is an online pharmacy that delivers genuine medicines and health products, checked by licensed pharmacists.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="medicines.html">Medicines</a></li>
+                        <li><a href="contact.html">About Us</a></li>
+                        <li><a href="account.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="medicines.html">Fever &amp; Pain</a></li>
+                        <li><a href="medicines.html">Vitamins</a></li>
+                        <li><a href="medicines.html">Devices</a></li>
+                        <li><a href="medicines.html">Skin Care</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Contact Us</h5>
+                    <address>
+                        12, Health Plaza, Kalawad Road,<br>Rajkot, Gujarat - 360005<br>
+                        &#9742; +91 98765 43210<br>
+                        &#9993; support@medikart.in
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 MediKart. Web Technology Term Work.</span>
+                <a href="../Admin/dashboard.html">Admin Panel</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#top" class="back-to-top" title="Back to top">&#8679;</a>
+
+    <!-- Bootstrap JS bundle (needed for navbar toggle, carousel, modal, collapse) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

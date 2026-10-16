@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Blood pressure monitor -->
+  <rect width="200" height="200" fill="#f8fafc"/>
+  <rect x="40" y="45" width="120" height="100" rx="14" fill="#ffffff" stroke="#334155" stroke-width="3"/>
+  <rect x="55" y="60" width="90" height="45" rx="5" fill="#0f172a"/>
+  <text x="100" y="90" text-anchor="middle" font-family="Arial" font-size="20" fill="#22c55e">120/80</text>
+  <circle cx="75" cy="125" r="8" fill="#3b82f6"/>
+  <circle cx="125" cy="125" r="8" fill="#94a3b8"/>
+  <rect x="95" y="145" width="10" height="35" fill="#334155"/>
+</svg>

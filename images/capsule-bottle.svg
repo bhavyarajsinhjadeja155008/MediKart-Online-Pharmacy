@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Capsule bottle (prescription) -->
+  <rect width="200" height="200" fill="#f0fdf4"/>
+  <rect x="65" y="30" width="70" height="25" rx="5" fill="#ffffff" stroke="#16a34a" stroke-width="3"/>
+  <rect x="55" y="53" width="90" height="120" rx="12" fill="#f59e0b" opacity="0.85"/>
+  <rect x="65" y="85" width="70" height="50" rx="6" fill="#ffffff"/>
+  <text x="100" y="117" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#16a34a">Rx</text>
+  <rect x="140" y="150" width="40" height="18" rx="9" fill="#16a34a"/>
+</svg>

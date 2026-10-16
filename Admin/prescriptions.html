@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Admin/prescriptions.html  (ADMIN 4 - Verify uploaded prescriptions)
+    Uses    : CSS grid stat cards, Bootstrap nav pills, HTML table, numbered list group, modal (review + decision form), HTML5 validation
+    Layout  : Common admin layout = dark sidebar (left) + top bar + content area
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediKart Admin | Prescriptions</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body class="admin-body">
+<div class="admin-wrapper">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-top">
+            <a href="dashboard.html" class="brand">
+                <img src="../images/logo.svg" alt="MediKart logo" width="34" height="34">
+                <span>MediKart <small>ADMIN</small></span>
+            </a>
+            <!-- Toggle button: visible below 992px only (see admin.css) -->
+            <button class="sidebar-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#adminMenu"
+                    aria-controls="adminMenu" aria-expanded="false" aria-label="Toggle admin menu">&#9776;</button>
+        </div>
+
+        <nav id="adminMenu" class="collapse">
+            <p class="sidebar-label">Main Menu</p>
+            <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html"><span>&#9632;</span> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-medicines.html"><span>&#10010;</span> Manage Medicines</a></li>
+                    <li class="nav-item"><a class="nav-link" href="manage-orders.html"><span>&#9776;</span> Orders &amp; Customers</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="prescriptions.html" aria-current="page"><span>&#9998;</span> Prescriptions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports.html"><span>&#9881;</span> Reports &amp; Settings</a></li>
+            </ul>
+            <p class="sidebar-label">Other</p>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="../Client/index.html" target="_blank"><span>&#8599;</span> View Website</a></li>
+                <li class="nav-item"><a class="nav-link logout" href="../Client/account.html"><span>&#10162;</span> Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ================= MAIN AREA ================= -->
+    <div class="admin-main">
+        <!-- Top bar: page title, breadcrumb and logged-in admin -->
+        <header class="admin-topbar">
+            <div>
+                <h1>Prescriptions</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.html">Admin</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Prescriptions</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="admin-user">
+                <img src="../images/avatar.svg" alt="Admin photo">
+                <span><strong>Kavya Desai</strong><br><small class="text-muted">Administrator</small></span>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <!-- ================= SUMMARY CARDS ================= -->
+            <section class="stat-cards">
+                <article class="stat-card orange">
+                    <p>Pending Review</p>
+                    <h3>6</h3>
+                    <small class="down">Oldest: 3 hours ago</small>
+                </article>
+                <article class="stat-card">
+                    <p>Verified Today</p>
+                    <h3>18</h3>
+                    <small class="up">&#9650; 4 more than yesterday</small>
+                </article>
+                <article class="stat-card red">
+                    <p>Rejected Today</p>
+                    <h3>2</h3>
+                    <small class="down">Unclear / expired</small>
+                </article>
+                <article class="stat-card blue">
+                    <p>Refills Due (7 days)</p>
+                    <h3>11</h3>
+                    <small class="up">Reminders scheduled</small>
+                </article>
+            </section>
+
+            <!-- ================= PRESCRIPTIONS TABLE ================= -->
+            <section class="panel">
+                <div class="panel-head">
+                    <h2>Uploaded Prescriptions</h2>
+                    <form class="admin-toolbar" action="prescriptions.html" method="get">
+                        <label for="rxSearch" class="visually-hidden">Search prescriptions</label>
+                        <input type="search" class="form-control" id="rxSearch" name="q" placeholder="Rx ID / customer / doctor">
+                        <label for="rxDate" class="visually-hidden">Upload date</label>
+                        <input type="date" class="form-control" id="rxDate" name="date">
+                        <button type="submit" class="btn btn-outline-brand">Filter</button>
+                    </form>
+                </div>
+
+                <!-- Status filter (Bootstrap nav pills used as links) -->
+                <ul class="nav nav-pills mb-3">
+                    <li class="nav-item"><a class="nav-link" href="prescriptions.html?status=pending">Pending (6)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="prescriptions.html?status=verified">Verified (842)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="prescriptions.html?status=rejected">Rejected (37)</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="prescriptions.html">All (885)</a></li>
+                </ul>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Rx ID</th>
+                                <th>Customer</th>
+                                <th>Order</th>
+                                <th>Doctor</th>
+                                <th>Rx Medicines</th>
+                                <th>Uploaded</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RX2210</td><td>Riya Shah</td><td>#MK1052</td><td>Dr. M. Pandya</td>
+                                <td>Amoxicillin 500 mg</td><td>07 Oct 2026, 10:24</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#reviewModal">Review</button></td>
+                            </tr>
+                            <tr>
+                                <td>RX2209</td><td>Vivek Soni</td><td>#MK1046</td><td>Dr. A. Rathod</td>
+                                <td>Metformin 500 mg</td><td>07 Oct 2026, 09:10</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#reviewModal">Review</button></td>
+                            </tr>
+                            <tr>
+                                <td>RX2208</td><td>Hetal Joshi</td><td>#MK1043</td><td>Dr. S. Mehta</td>
+                                <td>Atorvastatin 10 mg</td><td>07 Oct 2026, 07:45</td>
+                                <td><span class="status status-pending">Pending</span></td>
+                                <td><button type="button" class="btn btn-sm btn-brand" data-bs-toggle="modal" data-bs-target="#reviewModal">Review</button></td>
+                            </tr>
+                            <tr>
+                                <td>RX2207</td><td>Karan Vyas</td><td>#MK1049</td><td>Dr. P. Kotak</td>
+                                <td>Azithromycin 500 mg</td><td>06 Oct 2026, 18:30</td>
+                                <td><span class="status status-delivered">Verified</span></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-brand" data-bs-toggle="modal" data-bs-target="#reviewModal">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>RX2206</td><td>Pooja Rana</td><td>#MK1041</td><td>&ndash;</td>
+                                <td>Alprazolam 0.25 mg</td><td>05 Oct 2026, 16:05</td>
+                                <td><span class="status status-cancelled">Rejected</span></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-brand" data-bs-toggle="modal" data-bs-target="#reviewModal">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="row">
+                <!-- ================= VERIFICATION CHECKLIST ================= -->
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Verification Checklist</h2>
+                        </div>
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item">Doctor name, registration number and signature are visible</li>
+                            <li class="list-group-item">Prescription date is within the last 6 months</li>
+                            <li class="list-group-item">Patient name matches the customer account</li>
+                            <li class="list-group-item">Medicine, strength and quantity match the order</li>
+                            <li class="list-group-item">Schedule H / H1 drugs are noted in the register</li>
+                        </ol>
+                    </section>
+                </div>
+
+                <!-- ================= REFILL REMINDERS ================= -->
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <h2>Upcoming Refills</h2>
+                        </div>
+                        <div class="list-group">
+                            <a href="manage-orders.html" class="list-group-item list-group-item-action">
+                                <strong>Vivek Soni</strong> &ndash; Metformin 500 mg<br><small class="text-muted">Refill due on 09 Oct 2026</small>
+                            </a>
+                            <a href="manage-orders.html" class="list-group-item list-group-item-action">
+                                <strong>Hetal Joshi</strong> &ndash; Atorvastatin 10 mg<br><small class="text-muted">Refill due on 11 Oct 2026</small>
+                            </a>
+                            <a href="manage-orders.html" class="list-group-item list-group-item-action">
+                                <strong>Neha Patel</strong> &ndash; Levothyroxine 50 mcg<br><small class="text-muted">Refill due on 12 Oct 2026</small>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- ================= REVIEW PRESCRIPTION MODAL ================= -->
+            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="reviewTitle">Review Prescription &ndash; RX2210</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <!-- Uploaded prescription image -->
+                                <div class="col-md-5 mb-3">
+                                    <figure class="mb-0">
+                                        <img src="../images/prescription.svg" alt="Uploaded prescription of Riya Shah" class="rx-image">
+                                        <figcaption class="small text-muted mt-1">prescription_1052.jpg &bull; uploaded 07 Oct 2026</figcaption>
+                                    </figure>
+                                </div>
+
+                                <!-- Details + decision form -->
+                                <div class="col-md-7">
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item"><strong>Customer:</strong> Riya Shah (C10215)</li>
+                                        <li class="list-group-item"><strong>Order:</strong> #MK1052 &ndash; &#8377;540</li>
+                                        <li class="list-group-item"><strong>Doctor:</strong> Dr. M. Pandya, Reg. No. G-24518</li>
+                                        <li class="list-group-item"><strong>Rx medicine:</strong> Amoxicillin 500 mg &times; 2 strips</li>
+                                    </ul>
+
+                                    <form action="prescriptions.html" method="post">
+                                        <span class="form-label d-block required">Decision</span>
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input type="radio" class="form-check-input" id="rxApprove" name="decision" value="approve" required>
+                                            <label class="form-check-label" for="rxApprove">Approve</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input type="radio" class="form-check-input" id="rxReject" name="decision" value="reject">
+                                            <label class="form-check-label" for="rxReject">Reject</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="rxPharmacist" class="form-label required">Verified By</label>
+                                            <select class="form-select" id="rxPharmacist" name="pharmacist" required>
+                                                <option value="">-- Select pharmacist --</option>
+                                                <option>Dr. Kavya Desai</option>
+                                                <option>Rahul Joshi</option>
+                                                <option>Sneha Trivedi</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="rxRemarks" class="form-label">Remarks (sent to customer)</label>
+                                            <textarea class="form-control" id="rxRemarks" name="remarks" rows="3"
+                                                      placeholder="e.g. Prescription is clear and valid."></textarea>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="rxRefill" name="refill_reminder">
+                                            <label class="form-check-label" for="rxRefill">Set refill reminder for this customer</label>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-brand" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-brand">Save Decision</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS bundle (sidebar collapse, modals) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

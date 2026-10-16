@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--
+    MediKart - Online Pharmacy (College Term Work, Web Technology 01CE1306)
+    Page    : Client/index.html  (CLIENT 1 - Home / Landing page)
+    Uses    : HTML5 semantic tags, Bootstrap 5 (navbar, carousel, cards, grid,
+              blockquote, jumbotron-style box), custom CSS (css/style.css)
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MediKart - order genuine medicines and health products online.">
+    <title>MediKart | Online Pharmacy - Home</title>
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Our own stylesheet (loaded after Bootstrap so it can override it) -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+</head>
+<body id="top">
+
+    <!-- ================= TOP INFO BAR ================= -->
+    <div class="top-bar">
+        <div class="container top-bar-inner">
+            <span>&#9742; +91 98765 43210</span>
+            <span>&#9993; support@medikart.in</span>
+            <span class="top-bar-note">Free delivery on orders above &#8377;499</span>
+        </div>
+    </div>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand brand" href="index.html">
+                    <img src="../images/logo.svg" alt="MediKart logo" width="40" height="40">
+                    <span>Medi<b>Kart</b></span>
+                </a>
+                <!-- Hamburger button (shown below 992px) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu"
+                        aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="medicines.html">Medicines</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">About &amp; Contact</a></li>
+                        <li class="nav-item"><a class="nav-link nav-btn" href="account.html">Login / Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ================= HERO CAROUSEL ================= -->
+        <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators / dots -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="hero-slide slide-1">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7 hero-text">
+                                    <span class="hero-tag">100% Genuine Medicines</span>
+                                    <h1 class="display-5">Your Trusted <span>Online Pharmacy</span> at Your Doorstep</h1>
+                                    <p>Order medicines, health devices and wellness products from licensed pharmacists. Delivered within 24 hours.</p>
+                                    <a href="medicines.html" class="btn btn-brand btn-lg">Shop Medicines</a>
+                                    <a href="contact.html" class="btn btn-outline-brand btn-lg">Talk to Pharmacist</a>
+                                </div>
+                                <div class="col-lg-5 text-center">
+                                    <img src="../images/hero.svg" alt="Medicine bottle and capsules" class="hero-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="hero-slide slide-2">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7 hero-text">
+                                    <span class="hero-tag">Limited Offer</span>
+                                    <h1 class="display-5">Flat <span>20% OFF</span> on Vitamins &amp; Supplements</h1>
+                                    <p>Boost your immunity with Vitamin C, Zinc, Multivitamins and more. Use code <mark>HEALTH20</mark> at checkout.</p>
+                                    <a href="medicines.html" class="btn btn-brand btn-lg">Grab the Offer</a>
+                                </div>
+                                <div class="col-lg-5 text-center">
+                                    <img src="../images/vitamin-jar.svg" alt="Vitamin C jar" class="hero-img rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="hero-slide slide-3">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7 hero-text">
+                                    <span class="hero-tag">Health Devices</span>
+                                    <h1 class="display-5">Monitor Your Health <span>At Home</span></h1>
+                                    <p>BP monitors, glucometers and thermometers from top brands with 1-year warranty.</p>
+                                    <a href="medicines.html" class="btn btn-brand btn-lg">View Devices</a>
+                                </div>
+                                <div class="col-lg-5 text-center">
+                                    <img src="../images/bp-monitor.svg" alt="Blood pressure monitor" class="hero-img rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left / right controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </section>
+
+        <!-- ================= FEATURES STRIP (CSS grid) ================= -->
+        <section class="container">
+            <div class="feature-grid">
+                <article class="feature-box">
+                    <div class="feature-icon">&#10003;</div>
+                    <div>
+                        <h5>Genuine Products</h5>
+                        <p>Sourced from licensed distributors</p>
+                    </div>
+                </article>
+                <article class="feature-box">
+                    <div class="feature-icon">&#9992;</div>
+                    <div>
+                        <h5>Fast Delivery</h5>
+                        <p>Within 24 hours in the city</p>
+                    </div>
+                </article>
+                <article class="feature-box">
+                    <div class="feature-icon">&#9998;</div>
+                    <div>
+                        <h5>Upload Prescription</h5>
+                        <p>We verify and pack your order</p>
+                    </div>
+                </article>
+                <article class="feature-box">
+                    <div class="feature-icon">&#9742;</div>
+                    <div>
+                        <h5>24x7 Pharmacist</h5>
+                        <p>Free advice on call or chat</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= SHOP BY CATEGORY ================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Shop by Category</h2>
+                    <p>Find what you need quickly</p>
+                </div>
+                <div class="category-grid">
+                    <a href="medicines.html" class="category-card">
+                        <img src="../images/tablet-strip.svg" alt="Fever and pain">
+                        <h6>Fever &amp; Pain</h6>
+                    </a>
+                    <a href="medicines.html" class="category-card">
+                        <img src="../images/syrup.svg" alt="Cold and cough">
+                        <h6>Cold &amp; Cough</h6>
+                    </a>
+                    <a href="medicines.html" class="category-card">
+                        <img src="../images/vitamin-jar.svg" alt="Vitamins">
+                        <h6>Vitamins</h6>
+                    </a>
+                    <a href="medicines.html" class="category-card">
+                        <img src="../images/thermometer.svg" alt="Health devices">
+                        <h6>Health Devices</h6>
+                    </a>
+                    <a href="medicines.html" class="category-card">
+                        <img src="../images/cream-tube.svg" alt="Skin care">
+                        <h6>Skin Care</h6>
+                    </a>
+                    <a href="medicines.html" class="category-card">
+                        <img src="../images/sanitizer.svg" alt="Personal care">
+                        <h6>Personal Care</h6>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FEATURED MEDICINES (Bootstrap cards) ================= -->
+        <section class="section section-white">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Best Selling Products</h2>
+                    <p>Most ordered by our customers this month</p>
+                </div>
+
+                <div class="product-grid">
+                    <!-- Product card 1 -->
+                    <div class="card product-card">
+                        <span class="discount-label">14% OFF</span>
+                        <img src="../images/tablet-strip.svg" class="card-img-top" alt="Paracetamol 500 mg tablets">
+                        <div class="card-body">
+                            <span class="tag tag-otc">OTC</span>
+                            <h5 class="card-title"><a href="medicine-details.html">Paracetamol 500 mg Tablet</a></h5>
+                            <p class="product-meta">Strip of 15 tablets</p>
+                            <p class="price">&#8377;30 <del>&#8377;35</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Product card 2 -->
+                    <div class="card product-card">
+                        <span class="discount-label">17% OFF</span>
+                        <img src="../images/vitamin-jar.svg" class="card-img-top" alt="Vitamin C and Zinc tablets">
+                        <div class="card-body">
+                            <span class="tag tag-otc">OTC</span>
+                            <h5 class="card-title"><a href="medicine-details.html">Vitamin C + Zinc Tablets</a></h5>
+                            <p class="product-meta">Jar of 60 tablets</p>
+                            <p class="price">&#8377;249 <del>&#8377;299</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Product card 3 -->
+                    <div class="card product-card">
+                        <span class="discount-label">24% OFF</span>
+                        <img src="../images/bp-monitor.svg" class="card-img-top" alt="Automatic BP monitor">
+                        <div class="card-body">
+                            <span class="tag tag-otc">Device</span>
+                            <h5 class="card-title"><a href="medicine-details.html">Automatic BP Monitor</a></h5>
+                            <p class="product-meta">1 unit, 1-year warranty</p>
+                            <p class="price">&#8377;1,899 <del>&#8377;2,499</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Product card 4 -->
+                    <div class="card product-card">
+                        <img src="../images/syrup.svg" class="card-img-top" alt="Cough relief syrup">
+                        <div class="card-body">
+                            <span class="tag tag-otc">OTC</span>
+                            <h5 class="card-title"><a href="medicine-details.html">Cough Relief Syrup</a></h5>
+                            <p class="product-meta">Bottle of 100 ml</p>
+                            <p class="price">&#8377;95 <del>&#8377;110</del></p>
+                            <a href="medicine-details.html" class="btn btn-brand">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title mt-4 mb-0">
+                    <a href="medicines.html" class="btn btn-outline-brand">View All Medicines</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HOW TO ORDER (ordered list) ================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>How to Order</h2>
+                    <p>Get your medicines in 4 simple steps</p>
+                </div>
+                <ol class="steps">
+                    <li>
+                        <div class="step-num">1</div>
+                        <h5>Search</h5>
+                        <p>Find your medicine by name or browse by category.</p>
+                    </li>
+                    <li>
+                        <div class="step-num">2</div>
+                        <h5>Add to Cart</h5>
+                        <p>Select quantity and pack size, then add to cart.</p>
+                    </li>
+                    <li>
+                        <div class="step-num">3</div>
+                        <h5>Upload Prescription</h5>
+                        <p>Needed only for Rx medicines. Our pharmacist verifies it.</p>
+                    </li>
+                    <li>
+                        <div class="step-num">4</div>
+                        <h5>Get Delivery</h5>
+                        <p>Pay online or cash on delivery and relax at home.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ================= TESTIMONIALS (Bootstrap blockquote) ================= -->
+        <section class="section section-white">
+            <div class="container">
+                <div class="section-title">
+                    <h2>What Our Customers Say</h2>
+                    <p>Trusted by 50,000+ families</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <figure class="testimonial">
+                            <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                            <blockquote class="blockquote">
+                                <p>Medicines for my parents arrive on time every month. The reminder service is very helpful.</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer mb-0">Riya Shah, <cite title="Ahmedabad">Ahmedabad</cite></figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <figure class="testimonial">
+                            <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                            <blockquote class="blockquote">
+                                <p>Uploading the prescription was easy and the pharmacist called me to explain the dosage.</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer mb-0">Arjun Mehta, <cite title="Rajkot">Rajkot</cite></figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-12 col-lg-4 mb-4">
+                        <figure class="testimonial">
+                            <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                            <blockquote class="blockquote">
+                                <p>Good discounts on BP monitor and glucometer. Packaging was safe and sealed.</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer mb-0">Neha Patel, <cite title="Surat">Surat</cite></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CALL TO ACTION (jumbotron style) ================= -->
+        <section class="container">
+            <div class="mt-4 p-5 rounded cta-box">
+                <h2>Have a Prescription?</h2>
+                <p>Create a free account, upload your prescription and we will deliver the medicines to you.</p>
+                <a href="account.html" class="btn btn-accent btn-lg">Create Free Account</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Medi<span class="text-warning">Kart</span></h5>
+                    <p>MediKart is an online pharmacy that delivers genuine medicines and health products, checked by licensed pharmacists.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="medicines.html">Medicines</a></li>
+                        <li><a href="contact.html">About Us</a></li>
+                        <li><a href="account.html">My Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2 footer-col">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="medicines.html">Fever &amp; Pain</a></li>
+                        <li><a href="medicines.html">Vitamins</a></li>
+                        <li><a href="medicines.html">Devices</a></li>
+                        <li><a href="medicines.html">Skin Care</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-col">
+                    <h5>Contact Us</h5>
+                    <address>
+                        12, Health Plaza, Kalawad Road,<br>Rajkot, Gujarat - 360005<br>
+                        &#9742; +91 98765 43210<br>
+                        &#9993; support@medikart.in
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 MediKart. Web Technology Term Work.</span>
+                <a href="../Admin/dashboard.html">Admin Panel</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#top" class="back-to-top" title="Back to top">&#8679;</a>
+
+    <!-- Bootstrap JS bundle (needed for navbar toggle, carousel, modal, collapse) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
